@@ -61,7 +61,6 @@ async function execute(app_no, pwd) {
             'Sec-Fetch-User': '?1',
             'Upgrade-Insecure-Requests': '1',
             'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
-            'Cookie': 'PHPSESSID=mhrk4j1ifatli91am06s9j4rg8',
             ...data.getHeaders()
         },
         data: data
