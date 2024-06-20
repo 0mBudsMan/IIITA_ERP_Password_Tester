@@ -13,3 +13,9 @@ If the user hasn't changed ERP password (which by default is date of birth), thi
 ## Installation
  ```sh
 npm i && node index.js <Application_number>
+ ```
+## Example
+```sh
+npm i && node index.js IIT2022000
+ ```
+
