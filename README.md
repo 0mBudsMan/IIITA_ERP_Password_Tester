@@ -12,4 +12,3 @@ This Node.js application checks for all birth dates from 2003 to 2004 for a prov
 ## Installation
  ```sh
     npm i && node index.js <Application_number>
-    ```
