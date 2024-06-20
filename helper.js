@@ -69,7 +69,6 @@ async function execute(app_no, pwd) {
         const res = await axios.request(config);
         const root = parse(res.data);
         return {data: root.getElementsByTagName("sup"),pwd}
-        // if(pwd=="Om@iiita1") console.log(root.toString())
     }
     catch(e){
         console.log("FAILED FOR "+pwd+e);
